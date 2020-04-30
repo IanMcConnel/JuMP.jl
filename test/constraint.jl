@@ -1,3 +1,26 @@
+#  Copyright 2017, Iain Dunning, Joey Huchette, Miles Lubin, and contributors
+#  This Source Code Form is subject to the terms of the Mozilla Public
+#  License, v. 2.0. If a copy of the MPL was not distributed with this
+#  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#############################################################################
+# JuMP
+# An algebraic modeling language for Julia
+# See http://github.com/JuliaOpt/JuMP.jl
+#############################################################################
+# test/variable.jl
+# Testing for VariableRef
+#############################################################################
+
+using JuMP
+
+using LinearAlgebra
+using Test
+
+include("utilities.jl")
+@static if !(:JuMPExtension in names(Main))
+    include("JuMPExtension.jl")
+end
+
 function test_constraint_name(constraint, name, F::Type, S::Type)
     @test name == @inferred JuMP.name(constraint)
     model = constraint.model
